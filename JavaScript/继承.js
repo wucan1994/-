@@ -2,12 +2,12 @@
  * 原型链
  * 基本思想：利用原型使一个引用类型继承另一个引用类型的属性和方法
  * 缺点：
- * 1.包含引用类型值的原型，所有实例属性会共享改引用类型的属性；
+ * 1.包含引用类型值的原型，所有实例属性会共享该引用类型的属性；
  * 2.创建子类型的实例时，没有办法在不影响所有对象实例的情况下，向超类型的构造函数中传递参数。
  */
 function A() {}
 function B(){}
-B.prototype = A;
+B.prototype = new A();
 var b = new B();
 
 /**
@@ -90,3 +90,21 @@ function SubType() {
     SuperType.call(this);
 }
 inherite(SubType, SuperType);
+
+/**
+ * 继承多个对象：使用混入方式
+ */
+function SuperClass() {}
+
+function OtherSuperClass() {}
+
+function MyClass() {
+    SuperClass.call(this);
+    OtherSuperClass.call(this);
+}
+
+MyClass.prototype = Object.create(SuperClass.prototype);
+Object.assign(MyClass.prototype, OtherSuperClass.prototype);
+MyClass.prototype.constructor = MyClass;
+
+MyClass.prototype.myMethod = function() {}
