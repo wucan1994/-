@@ -12,7 +12,7 @@ class Node {
 
 /**
  * 
- * @param {对象，表示字母出现的频率} frequency 
+ * @param {object} frequency 字母和字母出现的频率键值对
  */
 function Huffman(frequency) {
     let arr = [];

@@ -1,6 +1,6 @@
 /**
  * 
- * @param {区间数组} ranges 
+ * @param {array} ranges 区间数组
  */
 function rangeCover(ranges) {
   ranges = ranges.sort((a, b) => {

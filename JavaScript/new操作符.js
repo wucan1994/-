@@ -17,10 +17,22 @@ function create() {
     let obj = {};
     let Con = [].shift.call(arguments);
     obj.__proto__ = Con.prototype;
+    console.log(this)
     let result = Con.apply(obj, arguments);
+    return typeof result === 'object' ? result : obj;
+}
+
+/**
+ * 简洁版实现
+ */
+function myNew(Func, ...args) {
+    let obj = Object.create(Func.prototype);
+    let result = Func.apply(Func, args);
     return typeof result === 'object' ? result : obj;
 }
 
 function F(){}
 var f = create(F)
 console.log(f.constructor === F, typeof f, f instanceof F, F.prototype.isPrototypeOf(f))
+var foo = create(F)
+console.log(foo.constructor === F, typeof foo, foo instanceof F, F.prototype.isPrototypeOf(foo))
